@@ -4,6 +4,7 @@ from time import sleep
 import argparse
 import datetime
 from pathlib import Path
+import subprocess
 
 def feed(duration):
     p = LED(26, active_high = False)
@@ -24,3 +25,5 @@ if args.duration:
     with open(Path("~/catfeeder.log").expanduser(),"a") as logfile:
         logfile.write(msg + '\n')
     feed(args.duration)
+
+    rc = subprocess.call(str(Path("~/bin/commit_log.sh").expanduser()))
